@@ -1,0 +1,232 @@
+[
+    {
+        "id": "1669a06fa795093a",
+        "type": "tab",
+        "label": "Complete Object Detection Prototype",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2c17ad32b8404cc6",
+        "type": "inject",
+        "z": "1669a06fa795093a",
+        "name": "Take Photo Raspberry Pi",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "69b0046851621f65"
+            ]
+        ]
+    },
+    {
+        "id": "72b1263232012d29",
+        "type": "comment",
+        "z": "1669a06fa795093a",
+        "name": "Check detected classes for specific object.",
+        "info": "",
+        "x": 1100,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "69b0046851621f65",
+        "type": "camerapi-takephoto",
+        "z": "1669a06fa795093a",
+        "filemode": "2",
+        "filename": "",
+        "filedefpath": "1",
+        "filepath": "",
+        "fileformat": "jpeg",
+        "resolution": "1",
+        "rotation": "0",
+        "fliph": "0",
+        "flipv": "0",
+        "brightness": "50",
+        "contrast": "0",
+        "sharpness": "0",
+        "quality": "80",
+        "imageeffect": "none",
+        "exposuremode": "auto",
+        "iso": "0",
+        "agcwait": "1.0",
+        "led": "0",
+        "awb": "auto",
+        "name": "",
+        "x": 600,
+        "y": 240,
+        "wires": [
+            [
+                "2fc8739475319138"
+            ]
+        ]
+    },
+    {
+        "id": "2fc8739475319138",
+        "type": "tensorflowCoco",
+        "z": "1669a06fa795093a",
+        "name": "",
+        "modelUrl": "http://127.0.0.1:1880/coco/model.json",
+        "scoreThreshold": 0.5,
+        "passthru": "bbox",
+        "lineColour": "magenta",
+        "x": 850,
+        "y": 340,
+        "wires": [
+            [
+                "b0c3c1627cdb3a51",
+                "7b5f86c10d212108"
+            ]
+        ]
+    },
+    {
+        "id": "b0c3c1627cdb3a51",
+        "type": "debug",
+        "z": "1669a06fa795093a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1090,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7b5f86c10d212108",
+        "type": "image",
+        "z": "1669a06fa795093a",
+        "name": "",
+        "width": "250",
+        "data": "image",
+        "dataType": "msg",
+        "thumbnail": false,
+        "active": true,
+        "pass": false,
+        "outputs": 0,
+        "x": 1080,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "86be0786c3f88108",
+        "type": "http request",
+        "z": "1669a06fa795093a",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.222/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 590,
+        "y": 340,
+        "wires": [
+            [
+                "2fc8739475319138"
+            ]
+        ]
+    },
+    {
+        "id": "e14429678c2f60d0",
+        "type": "inject",
+        "z": "1669a06fa795093a",
+        "name": "Take Photo ESP32 CAM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "86be0786c3f88108"
+            ]
+        ]
+    },
+    {
+        "id": "b947e8dd4b579fca",
+        "type": "http request",
+        "z": "1669a06fa795093a",
+        "name": "",
+        "method": "GET",
+        "ret": "bin",
+        "paytoqs": "ignore",
+        "url": "http://192.168.1.140/capture",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 590,
+        "y": 420,
+        "wires": [
+            [
+                "2fc8739475319138"
+            ]
+        ]
+    },
+    {
+        "id": "0eb28891b44039c2",
+        "type": "inject",
+        "z": "1669a06fa795093a",
+        "name": "Take Photo ESP-EYE",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 280,
+        "y": 420,
+        "wires": [
+            [
+                "b947e8dd4b579fca"
+            ]
+        ]
+    }
+]
