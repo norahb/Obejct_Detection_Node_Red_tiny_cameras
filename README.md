@@ -1,7 +1,9 @@
 # Obejct detection On Node-RED using three Tiny cameras
-This project uses 3 cameras and node-red on Raspberry Pi 4 to detect objects
+This project uses 3 cameras and node-red on Raspberry Pi 4 to detect objects.
 
-![image](https://github.com/norahb/Obejct_Detection_Node_Red_tiny_cameras/assets/25876385/806ef287-b00d-47c2-ab8e-a412f0c4cc34)
+
+![Screenshot](obd.png)
+
 
 The image depicts a visual representation of the object detection flow using Node-RED and three different cameras (ESP32 CAM, ESP-EYE, and Pi Camera) on a Raspberry Pi 4.
 
